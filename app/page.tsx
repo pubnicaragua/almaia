@@ -6,12 +6,15 @@ import { Input } from "@/components/ui/input"
 import { Menu } from "lucide-react"
 import { useState } from "react";
 import { useRef } from "react";
+import { SlideMenu } from "@/components/menu";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const endOfPageRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
-    phone: ''
+    phone: '',
+    gmail: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -41,7 +44,7 @@ export default function Home() {
 
       if (response.ok) {
         setIsSubmitted(true);
-        setFormData({ name: '', phone: '' });
+        setFormData({ name: '', phone: '', gmail: '' });
       } else {
         throw new Error('Error en el envío');
       }
@@ -53,29 +56,34 @@ export default function Home() {
     }
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="bg-primary overflow-hidden">
       {/* Header */}
-      <header className="flex md:justify-between items-center px-8 py-4">
-        <button className="text-white">
+      <header className="flex md:justify-between items-center px-8 py-8">
+        <button className="text-white md:invisible" onClick={toggleMenu}>
+          {isMenuOpen ? <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} ></SlideMenu> : null}
           <Menu size={24} />
         </button>
         <h1 className="text-4xl md:w-auto w-full text-center md:text-left md:text-5xl font-bold text-white">Alma<span className="text-[#b03aae9f]">IA</span> </h1>
         <button className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
-          onClick={()=>endOfPageRef.current?.scrollIntoView({ behavior: "smooth" })}>
+          onClick={() => endOfPageRef.current?.scrollIntoView({ behavior: "smooth" })}>
           Contactanos
         </button>
       </header>
 
       {/* Hero Section */}
-      <section className="relative pb-16">
+      <section className="relative pb-12">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 relative z-10">
+          <div className="md:w-1/2 relative z-10 ">
             <Image src="/almie-hero.svg" alt="Almie character" width={300} height={300} className="mx-auto" />
           </div>
           <div className="md:w-1/2 z-10">
             <div className="bg-white p-8 rounded-3xl max-w-md">
-              <div className="absolute left-1/2 md:left-0 top-1/2 md:top-1/2 md:-translate-x-[20px] -translate-y-1/2 w-0 h-0 border-t-[20px] border-t-transparent md:border-t-[20px] md:border-t-transparent md:border-r-[40px] md:border-r-white md:border-b-[20px] md:border-b-transparent"></div>
+
               <h2 className="text-2xl font-bold mb-2 text-gray-800">Bienvenido a Alma IA,</h2>
               <p className="text-xl text-gray-800">
                 soy <span className="font-bold">Almie</span>, y sere tu guia en tu recorrido nuestra web
@@ -84,21 +92,23 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+          <div className="scale-y-200 origin-left"> 
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
+              <path
+                fill="#ffffff"
+                fillOpacity="1"
+                d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+              ></path>
+            </svg>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="bg-white pt-16 pb-32 relative">
+      <section className="bg-white pt-16 pb-24 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/2 mb-8 md:mb-0 z-10 pl-4">
+            <div className="md:w-1/2 mb-8 md:mb-0 z-10 pl-4 md:pb-24">
               <h2 className="text-4xl font-bold mb-8 md:text-left text-center text-blue-500">Divertido, facil y seguro</h2>
               <div className="space-y-4">
                 <div className="flex items-start">
@@ -156,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Psychologists Section */}
-      <section className="bg-[#a9d4fb] pt-16 pb-32 relative">
+      <section className="bg-[#a9d4fb] pb-32 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10">
@@ -185,7 +195,7 @@ export default function Home() {
 
       {/* Teachers Section */}
       <section className="bg-white pt-16 pb-32 relative">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 md:pb-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10">
               <h2 className="text-4xl text-center md:text-left font-bold mb-8 text-blue-500">Ayuda a los docentes</h2>
@@ -260,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-white pt-16 pb-32 relative">
+      <section className="bg-white pt-16 md:pb-80 pb-52 relative">
         <div className="container mx-auto px-4 text-center  ">
           <h2 className="text-4xl text-center md:text-left font-bold mb-12 text-blue-500 max-w-3xl mx-auto">
             Transformemos la forma que cuidas tu bienestar con AlmaIA
@@ -289,6 +299,16 @@ export default function Home() {
                   onChange={handleChange}
                   value={formData.name}
                   className="text-center placeholder:text-center  md:rounded-l-lg md:border-none md:border-r-0 border-blue-700 border"
+                />
+              </div>
+              <div className="md:w-1/2 my-2 md:my-0">
+                <Input
+                  name="email"
+                  type="tel"
+                  placeholder="Gmail"
+                  onChange={handleChange}
+                  value={formData.phone}
+                  className="text-center placeholder:text-center md:border-none rounded-4 border-blue-700 border active:border-none"
                 />
               </div>
               <div className="md:w-1/2 my-2 md:my-0">
@@ -322,7 +342,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-[#a9d4fb]">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-center mb-12 pb-8">
             <div className="flex mb-8 md:mb-0 mr-12  justify-center justify-items-center items-start w-full md:w-auto">
               <div className="md:self-start flex flex-col items-center">
