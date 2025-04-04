@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Menu } from "lucide-react"
-import { useState } from "react";
-import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Menu } from "lucide-react";
+import { useState, useRef } from "react";
 import { SlideMenu } from "@/components/menu";
+import { InteractiveRatingGrid } from "@/components/hand";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,27 +19,21 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Envía el formulario realmente
-      const form = e.target;
+      const form = e.currentTarget as HTMLFormElement;
       const response = await fetch(form.action, {
         method: form.method,
         body: new FormData(form),
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
 
       if (response.ok) {
@@ -56,123 +50,111 @@ export default function Home() {
     }
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const scrollToContact = () => endOfPageRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  const featureItems = [
+    { icon: "/niños/diario.svg", text: "Tienes un diario para registrar sus emociones." },
+    { icon: "/niños/chat.svg", text: "Chat personalizado con Almie." },
+    { icon: "/niños/calendario.svg", text: "Organización de tareas y recordatorios divertidos." },
+    { icon: "/niños/editar.svg", text: "Personaliza a Almie y hazlo mas cercano a ti." },
+    { icon: "/niños/sos.svg", text: "Tenemos un boton de ayuda y denuncia cuando lo necesites." }
+  ];
+
+  const teacherFeatures = [
+    { icon: "/profesores/diario.svg", text: "Tendras resúmenes con el estado emocional de los estudiantes." },
+    { icon: "/profesores/alertas.svg", text: "Alertas sobre cambios de comportamiento facilitando una intervención oportuna." },
+    { icon: "/profesores/graficos.svg", text: "Gráficos de evolución a lo largo del tiempo para detectar patrones." }
+  ];
+
+  const footerLinks = {
+    products: [
+      { name: "AlmaIA app", href: "#" },
+      { name: "AlmaIA web", href: "#" },
+      { name: "Almie", href: "#" }
+    ],
+    social: [
+      { name: "Instagram", href: "https://www.instagram.com/almaia.cl" },
+      { name: "Linkedin", href: "https://www.linkedin.com/company/almaia-cl" },
+      { name: "Youtube", href: "https://youtu.be/vo6OhdCxnCM?si=O5CE4Wb9VInUNxnl" },
+      { name: "X", href: "https://x.com/almaia_cl" }
+    ],
+    legal: [
+      { name: "Términos", href: "#" },
+      { name: "Privacidad", href: "#" },
+      { name: "Cookies", href: "#" }
+    ]
   };
 
   return (
     <div className="bg-primary overflow-hidden">
-      {/* Header */}
-      <header className="flex md:justify-between items-center px-8 py-8">
-        <button className="text-white md:invisible" onClick={toggleMenu}>
-          {isMenuOpen ? <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} ></SlideMenu> : null}
+      <header className="flex md:justify-between items-center px-8 py-8 md:mb-10">
+        {isMenuOpen && <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} />}
+        <button className="text-white md:hidden" onClick={toggleMenu}>
           <Menu size={24} />
         </button>
-        <h1 className="text-4xl md:w-auto w-full text-center md:text-left md:text-5xl font-bold text-white">Alma<span className="text-[#b03aae9f]">IA</span> </h1>
-        <button className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
-          onClick={() => endOfPageRef.current?.scrollIntoView({ behavior: "smooth" })}>
+        <Image src="/log.png" alt="Almie character" width={144} height={40} className="mx-auto h-10 w-36" />
+        <button 
+          className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
+          onClick={scrollToContact}>
           Contactanos
         </button>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative pb-12">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 relative z-10 ">
+      <section className="relative pb-12 md:mb-12">
+        <div className="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
+          <div className="md:w-1/2 relative z-10">
             <Image src="/almie-hero.svg" alt="Almie character" width={300} height={300} className="mx-auto" />
           </div>
-          <div className="md:w-1/2 z-10">
-            <div className="bg-white p-8 rounded-3xl max-w-md">
-
-              <h2 className="text-2xl font-bold mb-2 text-gray-800">Bienvenido a Alma IA,</h2>
+          <div className="flex md:flex-row flex-col-reverse md:w-1/2 z-10 pl-32 mb-6">
+            <Image src="/chat.svg" alt="Chat bubble" width={80} height={80} className="-rotate-90 md:rotate-0 ml-6 md:ml-0" />
+            <div className="bg-white p-8 rounded-3xl max-w-xs">
+              <h2 className="text-2xl font-bold mb-2 text-gray-800">Bienvenido <span className="font-normal">a</span> Alma IA,</h2>
               <p className="text-xl text-gray-800">
-                soy <span className="font-bold">Almie</span>, y sere tu guia en tu recorrido nuestra web
+                Soy <span className="font-bold">Almie</span>, y sere tu <span className="font-bold">guia</span> en tu recorrido <span className="font-bold">nuestra web</span>
               </p>
             </div>
           </div>
         </div>
-        <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <div className="scale-y-200 origin-left"> 
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-              <path
-                fill="#ffffff"
-                fillOpacity="1"
-                d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-              ></path>
-            </svg>
-          </div>
+        <div className="absolute md:-bottom-28 -bottom-2 left-0 right-0 z-0">
+          <WaveSVG />
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="bg-white pt-16 pb-24 relative">
+      <section className="bg-white pt-32 pb-24 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10 pl-4 md:pb-24">
               <h2 className="text-4xl font-bold mb-8 md:text-left text-center text-blue-500">Divertido, facil y seguro</h2>
               <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="bg-transparent  p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/niños/diario.svg" alt="Diary" width={32} height={32} />
-                  </div>
-                  <p className="text-neutral-700">Tienes un diario para registrar sus emociones.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/niños/chat.svg" alt="Chat" width={32} height={32} />
-                  </div>
-                  <p className="text-neutral-700">Chat personalizado con Almie.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent  p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/niños/calendario.svg" alt="Tasks" width={32} height={32} />
-                  </div>
-                  <p className="text-neutral-700">Organización de tareas y recordatorios divertidos.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/niños/editar.svg" alt="Personalize" width={32} height={32} />
-                  </div>
-                  <p className="text-neutral-700">Personaliza a Almie y hazlo mas cercano a ti.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent  p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/niños/sos.svg" alt="Help" width={32} height={32} />
-                  </div>
-                  <p className="text-neutral-700">Tenemos un boton de ayuda y denuncia cuando lo necesites.</p>
-                </div>
+                {featureItems.map((item, index) => (
+                  <FeatureItem key={index} icon={item.icon} text={item.text} />
+                ))}
               </div>
             </div>
-            <div className="relative justify-self-end z-10 ">
-              <Image
-                src="/almie-emociones.svg"
-                alt="Almie happy"
-                width={500}
-                height={400}
-                className="bottom-0 right-0"
-              />
+            <div className="relative justify-self-end z-10 w-full">
+              <InteractiveRatingGrid />
             </div>
           </div>
         </div>
-        <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#a9d4fb"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+        <div className="absolute -bottom-16 md:-bottom-64 left-0 right-0 z-0 w-full scale-x-125 md:rotate-2 -rotate-6">
+          <Image
+            src="/vector-3.svg"
+            alt="Wave background"
+            width={1440}
+            height={320}
+            className="w-full h-auto -rotate-2"
+          />
         </div>
       </section>
 
-      {/* Psychologists Section */}
       <section className="bg-[#a9d4fb] pb-32 relative">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 z-10">
+          <div className="flex flex-col md:flex-row items-center md:mt-0 mt-20">
+            <div className="md:w-1/2 mb-8 md:mb-0 z-10 order-2 md:order-1 md:mt-0 mt-20">
               <Image src="/almie-psicologo.svg" alt="Almie with glasses" width={300} height={300} className="mx-auto" />
             </div>
-            <div className="md:w-1/2 z-10">
+            <div className="md:w-1/2 z-10 md:order-2 order-1">
               <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicologos</h2>
               <p className="text-neutral-700">
                 AlmalA ha sido desarrollado junto a un equipo de psicólogos y especialistas en bienestar infantil,
@@ -183,41 +165,19 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+          <WaveSVG />
         </div>
       </section>
 
-      {/* Teachers Section */}
       <section className="bg-white pt-16 pb-32 relative">
         <div className="container mx-auto px-4 md:pb-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10">
               <h2 className="text-4xl text-center md:text-left font-bold mb-8 text-blue-500">Ayuda a los docentes</h2>
               <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="bg-transparent p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/profesores/diario.svg" alt="Summary" width={44} height={44} />
-                  </div>
-                  <p className="text-neutral-700">Tendras resúmenes con el estado emocional de los estudiantes.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/profesores/alertas.svg" alt="Alerts" width={44} height={44} />
-                  </div>
-                  <p className="text-neutral-700">Alertas sobre cambios de comportamiento facilitando una intervención oportuna.</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-transparent p-2 rounded-md mr-4">
-                    <Image className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" src="/profesores/graficos.svg" alt="Graphs" width={44} height={44} />
-                  </div>
-                  <p className="text-neutral-700">Gráficos de evolución a lo largo del tiempo para detectar patrones.</p>
-                </div>
+                {teacherFeatures.map((item, index) => (
+                  <FeatureItem key={index} icon={item.icon} text={item.text} size={44} />
+                ))}
               </div>
             </div>
             <div className="md:w-1/2 z-10">
@@ -232,22 +192,18 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#a9d4fb"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+          <WaveSVG fill="#a9d4fb" />
         </div>
       </section>
 
-      {/* Parents Section */}
       <section className="bg-[#a9d4fb] pb-32 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center z-10">
-            <div className="md:w-1/2 mb-8 md:mb-0 z-10">
-              <Image src="/almie-padre.svg" alt="Almie with family" width={300} height={300} className="mx-auto" />
+            <div className="relative w-full max-w-[500px] h-[200px] mb-8 md:mb-0 z-10">
+              <Image src="/papahijo.svg" alt="Almie with family" width={300} height={300} className="mx-auto" />
+              <Image src="/ojos.svg" alt="Eyes" width={48} height={48} className="absolute mx-auto right-[28%] top-[48%] animate-oscillate delay-1000" />
+              <Image src="/mouth/good.svg" alt="Mouth" width={24} height={24} className="absolute mx-auto right-[28%] top-[64%]" />
+              <Image src="/manospadre.svg" alt="Hands" width={50} height={50} className="absolute mx-auto right-[32%] top-[19%] animate-oscillate" />
             </div>
             <div className="md:w-1/2 z-10">
               <h2 className="text-5xl font-bold mb-6 md:text-left text-center text-white">Conoce mejor a tu hijo</h2>
@@ -258,170 +214,126 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+        <div className="absolute md:-bottom-28 -bottom-0 left-0 right-0 z-0">
+          <WaveSVG className="scale-y-125" />
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="bg-white pt-16 md:pb-80 pb-52 relative">
-        <div className="container mx-auto px-4 text-center  ">
-          <h2 className="text-4xl text-center md:text-left font-bold mb-12 text-blue-500 max-w-3xl mx-auto">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl text-center font-bold mb-12 text-blue-500 max-w-3xl mx-auto">
             Transformemos la forma que cuidas tu bienestar con AlmaIA
           </h2>
           <form
-            // action="https://formsubmit.co/elieserhs999omega@gmail.com"
             action="https://formsubmit.co/Alexmedel@almaia.cl"
             method="POST"
             onSubmit={handleSubmit}
             className="w-[70%] mx-auto"
             ref={endOfPageRef}
           >
-            {/* Campos ocultos para configuración de FormSubmit */}
             <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web AlmaIA" />
-            <input type="hidden" name="_cc" value="dxgabalt@gmail.com" />
-            <input type="hidden" name="_cc" value="Alexmedel@almaia.cl" />
+            <input type="hidden" name="_cc" value="dxgabalt@gmail.com,Alexmedel@almaia.cl" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
 
-            <div className="flex flex-col md:flex-row relative z-10 rounded-lg md:border-2 md:border-blue-700 w-full">
-              <div className=" md:w-1/2 my-2 md:my-0">
-                <Input
-                  name="name"
-                  type="text"
-                  placeholder="Nombre"
-                  onChange={handleChange}
-                  value={formData.name}
-                  className="text-center placeholder:text-center  md:rounded-l-lg md:border-none md:border-r-0 border-blue-700 border"
-                />
-              </div>
-              <div className="md:w-1/2 my-2 md:my-0">
-                <Input
-                  name="email"
-                  type="tel"
-                  placeholder="Gmail"
-                  onChange={handleChange}
-                  value={formData.phone}
-                  className="text-center placeholder:text-center md:border-none rounded-4 border-blue-700 border active:border-none"
-                />
-              </div>
-              <div className="md:w-1/2 my-2 md:my-0">
-                <Input
-                  name="phone"
-                  type="tel"
-                  placeholder="Teléfono"
-                  onChange={handleChange}
-                  value={formData.phone}
-                  className="text-center placeholder:text-center md:border-none rounded-4 border-blue-700 border active:border-none"
-                />
-              </div>
-              <div className="pt-1 md:pt-0 md:w-1/2v my-2 md:my-0">
-                <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white md:rounded-r-lg md:rounded-l-none" disabled={isLoading || isSubmitted}>
-                  {isLoading ? "Enviando..." : isSubmitted ? "✓ Enviado" : "Contáctanos"}
-                </Button>
-              </div>
+            <div className="flex flex-col md:flex-row relative z-10 rounded-lg md:border-2 md:border-blue-700 w-full md:gap-0 gap-y-4 ">
+              <Input
+                name="name"
+                type="text"
+                placeholder="Nombre"
+                onChange={handleChange}
+                value={formData.name}
+                className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:rounded-l-lg md:border-none md:border-r-0 border-blue-700 border"
+              />
+              <Input
+                name="email"
+                type="tel"
+                placeholder="Gmail"
+                onChange={handleChange}
+                value={formData.phone}
+                className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:border-none border-blue-700 border"
+              />
+              <Input
+                name="phone"
+                type="tel"
+                placeholder="Teléfono"
+                onChange={handleChange}
+                value={formData.phone}
+                className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:border-none border-blue-700 border"
+              />
+              <Button 
+                type="submit" 
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white md:rounded-r-lg md:rounded-l-none" 
+                disabled={isLoading || isSubmitted}>
+                {isLoading ? "Enviando..." : isSubmitted ? "✓ Enviado" : "Contáctanos"}
+              </Button>
             </div>
           </form>
         </div>
         <div className="absolute -bottom-2 left-0 right-0 z-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path
-              fill="#a9d4fb"
-              fillOpacity="1"
-              d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
-          </svg>
+          <WaveSVG fill="#a9d4fb" />
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-[#a9d4fb]">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-center mb-12 pb-8">
-            <div className="flex mb-8 md:mb-0 mr-12  justify-center justify-items-center items-start w-full md:w-auto">
+            <div className="flex mb-8 md:mb-0 mr-12 justify-center items-start w-full md:w-auto">
               <div className="md:self-start flex flex-col items-center">
-                <div className=" p-2 rounded-md">
+                <div className="p-2 rounded-md">
                   <Image src="/almaia-icon-app.svg" alt="Almie logo" width={105} height={105} />
                 </div>
                 <span className="text-xl font-bold text-white">AlmaIA</span>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-              <div>
-                <h4 className="text-white font-bold mb-4">Productos</h4>
-                <ul className="space-y-2 text-white">
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      AlmaIA app
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      AlmaIA web
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      Almie
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-bold mb-4">Redes</h4>
-                <ul className="space-y-2 text-white">
-                  <li>
-                    <Link href="https://www.instagram.com/almaia.cl" className="hover:underline">
-                      Instagram
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="https://www.linkedin.com/company/almaia-cl" className="hover:underline">
-                      Linkedin
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="https://youtu.be/vo6OhdCxnCM?si=O5CE4Wb9VInUNxnl" className="hover:underline">
-                      Youtube
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="https://x.com/almaia_cl" className="hover:underline">
-                      X
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-bold mb-4">Términos y privacidad</h4>
-                <ul className="space-y-2 text-white">
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      Términos
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      Privacidad
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" className="hover:underline">
-                      Cookies
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              <FooterColumn title="Productos" links={footerLinks.products} />
+              <FooterColumn title="Redes" links={footerLinks.social} />
+              <FooterColumn title="Términos y privacidad" links={footerLinks.legal} />
             </div>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
+
+const WaveSVG = ({ fill = "#ffffff", className = "" }: { fill?: string; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className={`w-full ${className}`}>
+    <path
+      fill={fill}
+      fillOpacity="1"
+      d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,128C1120,128,1280,160,1360,176L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+    />
+  </svg>
+);
+
+const FeatureItem = ({ icon, text, size = 32 }: { icon: string; text: string; size?: number }) => (
+  <div className="flex items-start">
+    <div className="bg-transparent p-2 rounded-md mr-4">
+      <Image 
+        src={icon} 
+        alt="" 
+        width={size} 
+        height={size} 
+        className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" 
+      />
+    </div>
+    <p className="text-neutral-700">{text}</p>
+  </div>
+);
+
+const FooterColumn = ({ title, links }: { title: string; links: { name: string; href: string }[] }) => (
+  <div>
+    <h4 className="text-white font-bold mb-4">{title}</h4>
+    <ul className="space-y-2 text-white">
+      {links.map((link) => (
+        <li key={link.name}>
+          <Link href={link.href} className="hover:underline">
+            {link.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
