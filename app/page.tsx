@@ -94,7 +94,7 @@ export default function Home() {
           <Menu size={24} />
         </button>
         <Image src="/log.png" alt="Almie character" width={144} height={40} className="mx-auto h-10 w-36" />
-        <button 
+        <button
           className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
           onClick={scrollToContact}>
           Contactanos
@@ -199,12 +199,38 @@ export default function Home() {
       <section className="bg-[#a9d4fb] pb-32 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center z-10">
-            <div className="relative w-full max-w-[500px] h-[200px] mb-8 md:mb-0 z-10">
-              <Image src="/papahijo.svg" alt="Almie with family" width={300} height={300} className="mx-auto" />
-              <Image src="/ojos.svg" alt="Eyes" width={48} height={48} className="absolute mx-auto right-[28%] top-[48%] animate-oscillate delay-1000" />
-              <Image src="/mouth/good.svg" alt="Mouth" width={24} height={24} className="absolute mx-auto right-[28%] top-[64%]" />
-              <Image src="/manospadre.svg" alt="Hands" width={50} height={50} className="absolute mx-auto right-[32%] top-[19%] animate-oscillate" />
+            {/* Contenedor con dimensiones fijas */}
+            <div className="relative w-[500px] h-[200px] mb-8 md:mb-0 z-10 flex-shrink-0">
+              <Image
+                src="/papahijo.svg"
+                alt="Almie with family"
+                width={500}
+                height={200}
+                className="absolute w-[500px] h-[200px] object-contain"
+              />
+              <Image
+                src="/ojos.svg"
+                alt="Eyes"
+                width={48}
+                height={48}
+                className="absolute right-[140px] top-[96px] animate-oscillate delay-1000"
+              />
+              <Image
+                src="/mouth/good.svg"
+                alt="Mouth"
+                width={24}
+                height={24}
+                className="absolute right-[140px] top-[128px]"
+              />
+              <Image
+                src="/manospadre.svg"
+                alt="Hands"
+                width={50}
+                height={50}
+                className="absolute right-[160px] top-[38px] animate-oscillate"
+              />
             </div>
+
             <div className="md:w-1/2 z-10">
               <h2 className="text-5xl font-bold mb-6 md:text-left text-center text-white">Conoce mejor a tu hijo</h2>
               <p className="text-neutral-700">
@@ -261,9 +287,9 @@ export default function Home() {
                 value={formData.phone}
                 className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:border-none border-blue-700 border"
               />
-              <Button 
-                type="submit" 
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white md:rounded-r-lg md:rounded-l-none" 
+              <Button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white md:rounded-r-lg md:rounded-l-none"
                 disabled={isLoading || isSubmitted}>
                 {isLoading ? "Enviando..." : isSubmitted ? "✓ Enviado" : "Contáctanos"}
               </Button>
@@ -311,12 +337,12 @@ const WaveSVG = ({ fill = "#ffffff", className = "" }: { fill?: string; classNam
 const FeatureItem = ({ icon, text, size = 32 }: { icon: string; text: string; size?: number }) => (
   <div className="flex items-start">
     <div className="bg-transparent p-2 rounded-md mr-4">
-      <Image 
-        src={icon} 
-        alt="" 
-        width={size} 
-        height={size} 
-        className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]" 
+      <Image
+        src={icon}
+        alt=""
+        width={size}
+        height={size}
+        className="filter invert-[25%] sepia-[0%] saturate-[0%] hue-rotate-[0deg] brightness-[96%] contrast-[86%]"
       />
     </div>
     <p className="text-neutral-700">{text}</p>
