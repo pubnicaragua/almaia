@@ -153,13 +153,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#a9d4fb] pb-32 relative">
+      <section className="bg-[#a9d4fb] pb-32 relative mt-44">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center md:mt-0 mt-20">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10 order-2 md:order-1 md:mt-0 mt-20">
               <Image src="/almie-psicologo.svg" alt="Almie with glasses" width={300} height={300} className="mx-auto" />
             </div>
-            <div className="md:w-1/2 z-10 md:order-2 order-1">
+            <div className="md:w-1/2 z-10 md:order-2 order-1 ">
               <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicologos</h2>
               <p className="text-neutral-700">
                 AlmalA ha sido desarrollado junto a un equipo de psicólogos y especialistas en bienestar infantil,
