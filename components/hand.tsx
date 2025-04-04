@@ -139,14 +139,14 @@ export const InteractiveRatingGrid = () => {
           alt="Almie happy"
           width={180}
           height={180}
-          className="absolute"
+          className="absolute -bottom-36 md:right-10 -right-6" 
         />
         <Image
           src={mouthImages[activeItem - 1] || mouthImages[2]}
           alt='mouth'
           width={4}
           height={4}
-          className='absolute w-4 top-2/3 left-16'
+          className='absolute w-8 md:right-28 top-[100%] right-16'
         />
       </div>
     </div>

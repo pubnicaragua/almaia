@@ -90,3 +90,12 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); } /* Ajusta la distancia (5px) según necesidad */
 }
+@keyframes oscillate-x {
+  0%, 100% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+}
+
+/* Clases para aplicar las animaciones */
+.animate-oscillate-x {
+  animation: oscillate-x 3s ease-in-out infinite;
+}

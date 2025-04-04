@@ -9,8 +9,10 @@ import { SlideMenu } from "@/components/menu";
 import { InteractiveRatingGrid } from "@/components/hand";
 
 export default function Home() {
+  const homeOfPageRef = useRef<HTMLFormElement>(null!);
+  const contactOfPageRef = useRef<HTMLFormElement>(null);
+  const footOfPageRef = useRef<HTMLFormElement>(null!);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const endOfPageRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -51,7 +53,7 @@ export default function Home() {
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const scrollToContact = () => endOfPageRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToContact = () => contactOfPageRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const featureItems = [
     { icon: "/niños/diario.svg", text: "Tienes un diario para registrar sus emociones." },
@@ -89,11 +91,11 @@ export default function Home() {
   return (
     <div className="bg-primary overflow-hidden">
       <header className="flex md:justify-between items-center px-8 py-8 md:mb-10">
-        {isMenuOpen && <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} />}
+        {isMenuOpen && <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} footOfPageRef={footOfPageRef} homeOfPageRef={homeOfPageRef} scrollToContact={scrollToContact}/>}
         <button className="text-white md:hidden" onClick={toggleMenu}>
           <Menu size={24} />
         </button>
-        <Image src="/log.png" alt="Almie character" width={144} height={40} className="mx-auto h-10 w-36" />
+        <Image src="/log.png" alt="Almie character" width={200} height={40} className="mx-auto h-10 w-40 sm:w-48" />
         <button
           className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
           onClick={scrollToContact}>
@@ -101,7 +103,7 @@ export default function Home() {
         </button>
       </header>
 
-      <section className="relative pb-12 md:mb-12">
+      <section className="relative pb-12 md:mb-12" ref={homeOfPageRef}>
         <div className="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
           <div className="md:w-1/2 relative z-10">
             <Image src="/almie-hero.svg" alt="Almie character" width={300} height={300} className="mx-auto" />
@@ -109,9 +111,12 @@ export default function Home() {
           <div className="flex md:flex-row flex-col-reverse md:w-1/2 z-10 pl-32 mb-6">
             <Image src="/chat.svg" alt="Chat bubble" width={80} height={80} className="-rotate-90 md:rotate-0 ml-6 md:ml-0" />
             <div className="bg-white p-8 rounded-3xl max-w-xs">
-              <h2 className="text-2xl font-bold mb-2 text-gray-800">Bienvenido <span className="font-normal">a</span> Alma IA,</h2>
               <p className="text-xl text-gray-800">
-                Soy <span className="font-bold">Almie</span>, y sere tu <span className="font-bold">guia</span> en tu recorrido <span className="font-bold">nuestra web</span>
+                <span className="font-bold">Bienvenido</span> a 
+                <span className="font-bold"> Alma IA,</span> soy   
+                <span className="font-bold">Almie</span>, y sere tu 
+                <span className="font-bold">guia</span> en tu recorrido 
+                <span className="font-bold"> nuestra web.</span>
               </p>
             </div>
           </div>
@@ -121,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white pt-32 pb-24 relative">
+      <section className="bg-white pt-48 pb-24 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10 pl-4 md:pb-24">
@@ -142,8 +147,8 @@ export default function Home() {
             src="/vector-3.svg"
             alt="Wave background"
             width={1440}
-            height={320}
-            className="w-full h-auto -rotate-2"
+            height={820}
+            className="absolute md:-bottom-2 -bottom-32 w-full scale-y-150 h-auto min-h-[600px] md:-rotate-2"
           />
         </div>
       </section>
@@ -213,7 +218,7 @@ export default function Home() {
                 alt="Eyes"
                 width={48}
                 height={48}
-                className="absolute right-[140px] top-[96px] animate-oscillate delay-1000"
+                className="absolute right-[135px] top-[96px] animate-oscillate delay-1000"
               />
               <Image
                 src="/mouth/good.svg"
@@ -227,7 +232,7 @@ export default function Home() {
                 alt="Hands"
                 width={50}
                 height={50}
-                className="absolute right-[160px] top-[38px] animate-oscillate"
+                className="absolute right-[150px] top-[50px] animate-oscillate-x"
               />
             </div>
 
@@ -245,7 +250,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white pt-16 md:pb-80 pb-52 relative">
+      <section className="bg-white pt-16 md:pb-80 pb-52 relative" ref={contactOfPageRef}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl text-center font-bold mb-12 text-blue-500 max-w-3xl mx-auto">
             Transformemos la forma que cuidas tu bienestar con AlmaIA
@@ -255,7 +260,6 @@ export default function Home() {
             method="POST"
             onSubmit={handleSubmit}
             className="w-[70%] mx-auto"
-            ref={endOfPageRef}
           >
             <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web AlmaIA" />
             <input type="hidden" name="_cc" value="dxgabalt@gmail.com,Alexmedel@almaia.cl" />
@@ -274,7 +278,7 @@ export default function Home() {
               <Input
                 name="email"
                 type="tel"
-                placeholder="Gmail"
+                placeholder="Email"
                 onChange={handleChange}
                 value={formData.phone}
                 className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:border-none border-blue-700 border"
@@ -301,7 +305,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#a9d4fb]">
+      <footer className="bg-[#a9d4fb]" ref={footOfPageRef}>
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-center mb-12 pb-8">
             <div className="flex mb-8 md:mb-0 mr-12 justify-center items-start w-full md:w-auto">
