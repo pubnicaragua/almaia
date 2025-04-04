@@ -99,3 +99,16 @@
 .animate-oscillate-x {
   animation: oscillate-x 3s ease-in-out infinite;
 }
+
+@keyframes gentleShake {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.animate-gentle-shake {
+  animation: gentleShake 3s ease-in-out infinite;
+}

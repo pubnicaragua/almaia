@@ -7,6 +7,7 @@ import { Menu } from "lucide-react";
 import { useState, useRef } from "react";
 import { SlideMenu } from "@/components/menu";
 import { InteractiveRatingGrid } from "@/components/hand";
+import FloatingWhatsAppButton from "@/components/whatsapp";
 
 export default function Home() {
   const homeOfPageRef = useRef<HTMLFormElement>(null!);
@@ -57,7 +58,7 @@ export default function Home() {
 
   const featureItems = [
     { icon: "/niños/diario.svg", text: "Tienes un diario para registrar sus emociones." },
-    { icon: "/niños/chat.svg", text: "Chat personalizado con Almie." },
+    { icon: "/niños/chat.svg", text: "Habla conmigo para conocerte mejor." },
     { icon: "/niños/calendario.svg", text: "Organización de tareas y recordatorios divertidos." },
     { icon: "/niños/editar.svg", text: "Personaliza a Almie y hazlo mas cercano a ti." },
     { icon: "/niños/sos.svg", text: "Tenemos un boton de ayuda y denuncia cuando lo necesites." }
@@ -90,8 +91,9 @@ export default function Home() {
 
   return (
     <div className="bg-primary overflow-hidden">
+      <FloatingWhatsAppButton />
       <header className="flex md:justify-between items-center px-8 py-8 md:mb-10">
-        {isMenuOpen && <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} footOfPageRef={footOfPageRef} homeOfPageRef={homeOfPageRef} scrollToContact={scrollToContact}/>}
+        {isMenuOpen && <SlideMenu isOpen={isMenuOpen} onClose={toggleMenu} footOfPageRef={footOfPageRef} homeOfPageRef={homeOfPageRef} scrollToContact={scrollToContact} />}
         <button className="text-white md:hidden" onClick={toggleMenu}>
           <Menu size={24} />
         </button>
@@ -112,10 +114,10 @@ export default function Home() {
             <Image src="/chat.svg" alt="Chat bubble" width={80} height={80} className="-rotate-90 md:rotate-0 ml-6 md:ml-0" />
             <div className="bg-white p-8 rounded-3xl max-w-xs">
               <p className="text-xl text-gray-800">
-                <span className="font-bold">Bienvenido</span> a 
-                <span className="font-bold"> Alma IA,</span> soy   
-                <span className="font-bold">Almie</span>, y sere tu 
-                <span className="font-bold">guia</span> en tu recorrido 
+                <span className="font-bold">Bienvenido</span> a
+                <span className="font-bold"> Alma IA,</span> soy
+                <span className="font-bold">Almie</span>, y sere tu
+                <span className="font-bold">guia</span> en tu recorrido
                 <span className="font-bold"> nuestra web.</span>
               </p>
             </div>
@@ -153,15 +155,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#a9d4fb] pb-32 relative mt-44">
+      <section className="bg-[#a9d4fb] pb-32 relative pt-36">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center md:mt-0 mt-20">
-            <div className="md:w-1/2 mb-8 md:mb-0 z-10 order-2 md:order-1 md:mt-0 mt-20">
-              <Image src="/almie-psicologo.svg" alt="Almie with glasses" width={300} height={300} className="mx-auto" />
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Contenedor de imágenes */}
+            <div className="relative md:w-1/2 mb-8 md:mb-0 z-10 order-2 md:order-1">
+              <div className="relative mx-auto w-full max-w-[300px]">
+                <Image
+                  src="/psicologo.svg"
+                  alt="Almie with glasses"
+                  width={300}
+                  height={300}
+                  className="w-full"
+                />
+                <Image
+                  src="/psicoanotaciones.svg"
+                  alt="Notas psicológicas"
+                  width={115}
+                  height={115}
+                  className="absolute w-[38%] max-w-[115px] animate-gentle-shake
+                       left-[19%] top-[34%] 
+                       md:left-[19%] md:top-[34%]"
+                />
+              </div>
             </div>
-            <div className="md:w-1/2 z-10 md:order-2 order-1 ">
+
+            {/* Contenido de texto */}
+            <div className="md:w-1/2 z-10 md:order-2 order-1">
               <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicologos</h2>
-              <p className="text-neutral-700">
+              <p className="text-neutral-700 md:md-0 mb-10">
                 AlmalA ha sido desarrollado junto a un equipo de psicólogos y especialistas en bienestar infantil,
                 asegurando que cada herramienta y actividad esté basada en evidencia científica para el desarrollo
                 emocional de los estudiantes.
@@ -216,9 +238,9 @@ export default function Home() {
               <Image
                 src="/ojos.svg"
                 alt="Eyes"
-                width={48}
-                height={48}
-                className="absolute right-[135px] top-[96px] animate-oscillate delay-1000"
+                width={58}
+                height={58}
+                className="absolute right-[128px] top-[96px] animate-oscillate delay-1000"
               />
               <Image
                 src="/mouth/good.svg"

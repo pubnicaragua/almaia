@@ -9,6 +9,8 @@ export const InteractiveRatingGrid = () => {
   const animationFrameRef = useRef<number>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activeItem, setActiveItem] = useState<number>(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const autoMoveRef = useRef({ direction: 1, progress: 0 });
 
   const ratingImages = [
     '/muymal.svg',
@@ -40,7 +42,25 @@ export const InteractiveRatingGrid = () => {
 
     if (!container || !cursor) return;
 
+    const handleMouseEnter = () => {
+      setIsHovering(true);
+      autoMoveRef.current.progress = 0;
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovering(false);
+      // Reset position when mouse leaves to avoid jump
+      const rect = container.getBoundingClientRect();
+      targetPosRef.current = {
+        x: rect.width / 2 - 16,
+        y: rect.height / 2 - 16,
+        rotation: 0
+      };
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
+      if (!isHovering) return;
+      
       const rect = container.getBoundingClientRect();
       const xPos = e.clientX - rect.left;
       const yPos = e.clientY - rect.top;
@@ -59,30 +79,63 @@ export const InteractiveRatingGrid = () => {
     };
 
     const animate = () => {
+      if (!isHovering) {
+        // Auto movement animation
+        const rect = container.getBoundingClientRect();
+        const width = rect.width - 32;
+        const height = rect.height - 32;
+        
+        autoMoveRef.current.progress += 0.005 * autoMoveRef.current.direction;
+        
+        if (autoMoveRef.current.progress >= 1) {
+          autoMoveRef.current.direction = -1;
+        } else if (autoMoveRef.current.progress <= 0) {
+          autoMoveRef.current.direction = 1;
+        }
+        
+        const sineProgress = Math.sin(autoMoveRef.current.progress * Math.PI);
+        
+        targetPosRef.current = {
+          x: width * autoMoveRef.current.progress,
+          y: height / 2 + Math.sin(autoMoveRef.current.progress * Math.PI * 2) * 10,
+          rotation: sineProgress * 30
+        };
+    
+        // Actualizar activeItem durante movimiento automático
+        const itemWidth = rect.width / 5;
+        const newActiveItem = Math.min(Math.floor(targetPosRef.current.x / itemWidth) + 1, 5);
+        setActiveItem(newActiveItem);
+      }
+    
+      // Smooth movement towards target
       posRef.current.x += (targetPosRef.current.x - posRef.current.x) * 0.2;
       posRef.current.y += (targetPosRef.current.y - posRef.current.y) * 0.2;
       posRef.current.rotation += (targetPosRef.current.rotation - posRef.current.rotation) * 0.1;
-
+    
       if (cursorRef.current) {
         cursorRef.current.style.transform = `
           translate(${posRef.current.x}px, ${posRef.current.y}px)
           rotate(${posRef.current.rotation}deg)
         `;
       }
-
+    
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
     container.addEventListener('mousemove', handleMouseMove);
     animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
       container.removeEventListener('mousemove', handleMouseMove);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [isHovering]);
 
   useEffect(() => {
     if (hoveredIndex === null) return;
@@ -107,7 +160,7 @@ export const InteractiveRatingGrid = () => {
               src="hand.png"
               alt="hand"
               fill
-              className="relative object-contain filter brightness-[0.4] sepia-1 saturate-0"
+              className="relative object-contain filter brightness-[1.5] contrast-[1.2] saturate-0"
             />
           </div>
 
