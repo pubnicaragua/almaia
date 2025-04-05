@@ -112,3 +112,17 @@
 .animate-gentle-shake {
   animation: gentleShake 3s ease-in-out infinite;
 }
+
+@keyframes gentleShakev2 {
+  0%, 100% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+}
+
+.animate-gentle-shakev2 {
+  animation: gentleShakev2 2s ease-in-out infinite;
+}
+

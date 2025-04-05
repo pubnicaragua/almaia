@@ -107,17 +107,43 @@ export default function Home() {
 
       <section className="relative pb-12 md:mb-12" ref={homeOfPageRef}>
         <div className="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
-          <div className="md:w-1/2 relative z-10">
-            <Image src="/almie-hero.svg" alt="Almie character" width={300} height={300} className="mx-auto" />
+          {/* Contenedor de imágenes */}
+          <div className="relative md:w-1/2 z-10">
+            <div className="relative mx-auto w-full max-w-[300px]">
+              <Image
+                src="/almahome.svg"
+                alt="Almie character"
+                width={300}
+                height={300}
+                className="w-full"
+              />
+              <Image
+                src="/handhome.svg"
+                alt="Almie character"
+                width={85}
+                height={85}
+                className="absolute w-[28%] max-w-[85px] 
+                     top-[35%] right-[9%]
+                     md:top-[32%] md:-right-[25%] animate-gentle-shakev2"
+              />
+            </div>
           </div>
-          <div className="flex md:flex-row flex-col-reverse md:w-1/2 z-10 pl-32 mb-6">
-            <Image src="/chat.svg" alt="Chat bubble" width={80} height={80} className="-rotate-90 md:rotate-0 ml-6 md:ml-0" />
-            <div className="bg-white p-8 rounded-3xl max-w-xs">
-              <p className="text-xl text-gray-800">
+
+          {/* Contenido de texto con chat */}
+          <div className="flex md:flex-row flex-col-reverse md:w-1/2 z-10 md:pl-32 mb-6">
+            <Image
+              src="/chat.svg"
+              alt="Chat bubble"
+              width={80}
+              height={80}
+              className="-rotate-90 md:rotate-0 ml-6 md:ml-0 w-[60px] md:w-[80px]"
+            />
+            <div className="bg-white p-6 md:p-8 rounded-3xl max-w-xs">
+              <p className="text-lg md:text-xl text-gray-800">
                 <span className="font-bold">Bienvenido</span> a
                 <span className="font-bold"> Alma IA,</span> soy
-                <span className="font-bold">Almie</span>, y sere tu
-                <span className="font-bold">guia</span> en tu recorrido
+                <span className="font-bold">Almie</span>, y seré tu
+                <span className="font-bold">guía</span> en tu recorrido por
                 <span className="font-bold"> nuestra web.</span>
               </p>
             </div>
@@ -150,8 +176,8 @@ export default function Home() {
             alt="Wave background"
             width={1440}
             height={820}
-            className="absolute md:-bottom-2 -bottom-32 w-full scale-y-150 h-auto min-h-[600px] md:-rotate-2"
-          />
+            className="absolute md:-bottom-14 -bottom-32 w-full scale-y-70 h-auto min-h-[540px] md:-rotate-2 -right-8"
+          />https://www.ssyoutube.com/watch?v=J9kgpvnErT8 https://www.youtube.com/watch?v=VukULE056Mc
         </div>
       </section>
 
@@ -238,9 +264,9 @@ export default function Home() {
               <Image
                 src="/ojos.svg"
                 alt="Eyes"
-                width={58}
-                height={58}
-                className="absolute right-[128px] top-[96px] animate-oscillate delay-1000"
+                width={61}
+                height={61}
+                className="absolute right-[122px] top-[100px] animate-oscillate delay-1000"
               />
               <Image
                 src="/mouth/good.svg"
