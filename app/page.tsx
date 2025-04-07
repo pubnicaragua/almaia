@@ -170,14 +170,14 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="absolute -bottom-16 md:-bottom-64 left-0 right-0 z-0 w-full scale-x-125 md:rotate-2 -rotate-6">
+        <div className="absolute -bottom-[5.4rem] md:-bottom-64 left-0 right-0 z-0 w-full scale-x-125 md:rotate-2 -rotate-6">
           <Image
             src="/vector-3.svg"
             alt="Wave background"
             width={1440}
             height={820}
             className="absolute md:-bottom-14 -bottom-32 w-full scale-y-70 h-auto min-h-[540px] md:-rotate-2 -right-8"
-          />https://www.ssyoutube.com/watch?v=J9kgpvnErT8 https://www.youtube.com/watch?v=VukULE056Mc
+          />
         </div>
       </section>
 
@@ -348,7 +348,7 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div className="absolute -bottom-2 left-0 right-0 z-0">
+        <div className="absolute -bottom-1 left-0 right-0 z-0">
           <WaveSVG fill="#a9d4fb" />
         </div>
       </section>
