@@ -201,6 +201,13 @@ export const InteractiveRatingGrid = () => {
           height={4}
           className='absolute w-8 md:right-28 top-[100%] right-16'
         />
+                <Image
+          src="/mano.png"
+          alt="Almie happy"
+          width={40}
+          height={40}
+          className=" hidden md:block md:absolute -bottom-14 md:right-4 -right-6 rotate-[112deg]" 
+        />
       </div>
     </div>
   );

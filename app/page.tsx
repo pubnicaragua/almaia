@@ -57,16 +57,16 @@ export default function Home() {
   const scrollToContact = () => contactOfPageRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const featureItems = [
-    { icon: "/niños/diario.svg", text: "Tienes un diario para registrar sus emociones." },
+    { icon: "/niños/diario.svg", text: "Tienes un diario para registrar tus emociones." },
     { icon: "/niños/chat.svg", text: "Habla conmigo para conocerte mejor." },
-    { icon: "/niños/calendario.svg", text: "Organización de tareas y recordatorios divertidos." },
-    { icon: "/niños/editar.svg", text: "Personaliza a Almie y hazlo mas cercano a ti." },
-    { icon: "/niños/sos.svg", text: "Tenemos un boton de ayuda y denuncia cuando lo necesites." }
+    { icon: "/niños/calendario.svg", text: "Organiza tus tareas y recibe recordatorios de forma divertida." },
+    { icon: "/niños/editar.svg", text: "Personaliza a Almie y hazlo más cercano a ti." },
+    { icon: "/niños/sos.svg", text: "Tenemos un botón de ayuda y denuncia cuando lo necesites." }
   ];
 
   const teacherFeatures = [
-    { icon: "/profesores/diario.svg", text: "Tendras resúmenes con el estado emocional de los estudiantes." },
-    { icon: "/profesores/alertas.svg", text: "Alertas sobre cambios de comportamiento facilitando una intervención oportuna." },
+    { icon: "/profesores/diario.svg", text: "Tendrás resúmenes con el estado emocional de los estudiantes." },
+    { icon: "/profesores/alertas.svg", text: "Recibe alertas sobre cambios de comportamiento que facilitan una intervención oportuna." },
     { icon: "/profesores/graficos.svg", text: "Gráficos de evolución a lo largo del tiempo para detectar patrones." }
   ];
 
@@ -158,7 +158,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 mb-8 md:mb-0 z-10 pl-4 md:pb-24">
-              <h2 className="text-4xl font-bold mb-8 md:text-left text-center text-blue-500">Divertido, facil y seguro</h2>
+              <h2 className="text-4xl font-bold mb-8 md:text-left text-center text-blue-500">Divertido, fácil y seguro</h2>
               <div className="space-y-4">
                 {featureItems.map((item, index) => (
                   <FeatureItem key={index} icon={item.icon} text={item.text} />
@@ -208,7 +208,7 @@ export default function Home() {
 
             {/* Contenido de texto */}
             <div className="md:w-1/2 z-10 md:order-2 order-1">
-              <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicologos</h2>
+              <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicólogos</h2>
               <p className="text-neutral-700 md:md-0 mb-10">
                 AlmalA ha sido desarrollado junto a un equipo de psicólogos y especialistas en bienestar infantil,
                 asegurando que cada herramienta y actividad esté basada en evidencia científica para el desarrollo
