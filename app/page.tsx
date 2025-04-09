@@ -101,7 +101,7 @@ export default function Home() {
         <button
           className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"
           onClick={scrollToContact}>
-          Contactanos
+          Contáctanos
         </button>
       </header>
 
