@@ -142,8 +142,8 @@ export default function Home() {
               <p className="text-lg md:text-xl text-gray-800">
                 <span className="font-bold">Bienvenido</span> a
                 <span className="font-bold"> Alma IA,</span> soy
-                <span className="font-bold">Almie</span>, y seré tu
-                <span className="font-bold">guía</span> en tu recorrido por
+                <span className="font-bold"> Almie</span>, y seré tu
+                <span className="font-bold"> guía</span> en tu recorrido por
                 <span className="font-bold"> nuestra web.</span>
               </p>
             </div>
@@ -287,7 +287,7 @@ export default function Home() {
             <div className="md:w-1/2 z-10">
               <h2 className="text-5xl font-bold mb-6 md:text-left text-center text-white">Conoce mejor a tu hijo</h2>
               <p className="text-neutral-700">
-                Accede a información sobre el estado emocional de tu hijo, sus avances y necesidades. Recibe reportes
+                Accede a información sobre el estado emocional de tu hijo: sus avances y necesidades. Recibe reportes
                 claros y herramientas para fortalecer su bienestar desde casa.
               </p>
             </div>
