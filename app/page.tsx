@@ -210,9 +210,7 @@ export default function Home() {
             <div className="md:w-1/2 z-10 md:order-2 order-1">
               <h2 className="text-4xl text-center md:text-left font-bold mb-6 text-white">Respaldado por psicólogos</h2>
               <p className="text-neutral-700 md:md-0 mb-10">
-                AlmalA ha sido desarrollado junto a un equipo de psicólogos y especialistas en bienestar infantil,
-                asegurando que cada herramienta y actividad esté basada en evidencia científica para el desarrollo
-                emocional de los estudiantes.
+                AlmaIA ha sido desarrollada junto a un equipo de psicólogos especialistas en salud mental infanto-juvenil, asegurando que cada herramienta y actividad esté respaldada por evidencia científica para fortalecer el desarrollo emocional de los estudiantes.
               </p>
             </div>
           </div>
