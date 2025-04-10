@@ -122,7 +122,7 @@ export default function Home() {
                 alt="Almie character"
                 width={85}
                 height={85}
-                className="absolute w-[28%] max-w-[85px] 
+                className="hidden md:block absolute w-[28%] max-w-[85px] 
                      top-[35%] right-[9%]
                      md:top-[32%] md:-right-[25%] animate-gentle-shakev2"
               />
