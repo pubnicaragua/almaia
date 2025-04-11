@@ -23,7 +23,7 @@ const FloatingWhatsAppButton: React.FC = () => {
 
   const handleClick = () => {
     // Aquí puedes cambiar el número de teléfono y el mensaje predeterminado
-    const phoneNumber = '1234567890'; // Reemplaza con tu número
+    const phoneNumber = '+56929501280'; // Reemplaza con tu número
     const defaultMessage = 'Hola, estoy interesado en tus servicios';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
     window.open(whatsappUrl, '_blank');
