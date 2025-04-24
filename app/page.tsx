@@ -61,20 +61,20 @@ export default function Home() {
 
   const featureItems = [
     {
-      icon: '/niños/diario.svg',
+      icon: '/ninos/diario.svg',
       text: 'Tienes un diario para registrar tus emociones.',
     },
-    { icon: '/niños/chat.svg', text: 'Habla conmigo para conocerte mejor.' },
+    { icon: '/ninos/chat.svg', text: 'Habla conmigo para conocerte mejor.' },
     {
-      icon: '/niños/calendario.svg',
+      icon: '/ninos/calendario.svg',
       text: 'Organiza tus tareas y recibe recordatorios de forma divertida.',
     },
     {
-      icon: '/niños/editar.svg',
+      icon: '/ninos/editar.svg',
       text: 'Personaliza a Almie y hazlo más cercano a ti.',
     },
     {
-      icon: '/niños/sos.svg',
+      icon: '/ninos/sos.svg',
       text: 'Tenemos un botón de ayuda y denuncia cuando lo necesites.',
     },
   ];
