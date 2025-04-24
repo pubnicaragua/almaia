@@ -395,7 +395,7 @@ export default function Home() {
               />
               <Input
                 name="gmail"
-                type="email"
+                type="text"
                 placeholder="Email"
                 onChange={handleChange}
                 value={formData.gmail}
