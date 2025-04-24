@@ -7,6 +7,7 @@ import { Menu } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { SlideMenu } from '@/components/menu';
 import { InteractiveRatingGrid } from '@/components/hand';
+import { VideoCarousel } from '@/components/video-carousel';
 import FloatingWhatsAppButton from '@/components/whatsapp';
 
 export default function Home() {
@@ -427,6 +428,8 @@ export default function Home() {
           <WaveSVG fill="#a9d4fb" />
         </div>
       </section>
+
+      <VideoCarousel />
 
       <footer className="bg-[#a9d4fb]" ref={footOfPageRef}>
         <div className="container mx-auto">
