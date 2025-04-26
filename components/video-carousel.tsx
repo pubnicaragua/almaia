@@ -11,8 +11,8 @@ interface Video {
 export function VideoCarousel() {
   const videos: Video[] = [
     { id: 'vo6OhdCxnCM', title: 'AlmaIA Video 1' },
-    { id: 'dQw4w9WgXcQ', title: 'AlmaIA Video 2' },
-    { id: 'jNQXAC9IVRw', title: 'AlmaIA Video 3' },
+    { id: 'vo6OhdCxnCM', title: 'AlmaIA Video 2' },
+    { id: 'vo6OhdCxnCM', title: 'AlmaIA Video 3' },
   ];
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);

@@ -111,7 +111,7 @@ export default function Home() {
       { name: 'X', href: 'https://x.com/almaia_cl' },
     ],
     legal: [
-      { name: 'Términos', href: '#' },
+      { name: 'Términos', href: '/terminos' },
       { name: 'Privacidad', href: '#' },
       { name: 'Cookies', href: '#' },
     ],
