@@ -387,6 +387,7 @@ export default function Home() {
 
             <div className="flex flex-col md:flex-row relative z-10 rounded-lg md:border-2 md:border-blue-700 w-full md:gap-0 gap-y-4 ">
               <Input
+                required
                 name="name"
                 type="text"
                 placeholder="Nombre"
@@ -395,6 +396,7 @@ export default function Home() {
                 className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:rounded-l-lg md:border-none md:border-r-0 border-blue-700 border"
               />
               <Input
+                required
                 name="gmail"
                 type="text"
                 placeholder="Email"
@@ -403,6 +405,7 @@ export default function Home() {
                 className="focus-visible:ring-0 focus-visible:ring-offset-0 text-center placeholder:text-center md:border-none border-blue-700 border"
               />
               <Input
+                required
                 name="phone"
                 type="tel"
                 placeholder="Teléfono"

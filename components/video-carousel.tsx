@@ -138,11 +138,11 @@ export function VideoCarousel() {
           {/* Social media links */}
           <div className="flex justify-center mt-8 space-x-24">
             <a
-              href="https://www.tiktok.com/@almaia"
+              href="https://twitter.com/almaia_cl"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 transition-all"
-              aria-label="TikTok"
+              aria-label="X (Twitter)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -155,12 +155,8 @@ export function VideoCarousel() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
-                <path d="M15 8c0 1.657-1.343 3-3 3"></path>
-                <path d="M21 8v4"></path>
-                <path d="M21 12c-2.4 0-4-1.6-4-4"></path>
-                <path d="M13 5.5V3"></path>
-                <path d="M13 3h4"></path>
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
               </svg>
             </a>
             <a
