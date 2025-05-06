@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 
 interface Video {
@@ -15,8 +15,27 @@ export function VideoCarousel() {
     { id: 'vo6OhdCxnCM', title: 'AlmaIA Video 3' },
   ];
 
+  const categories = ['Almie te guía','Lo nuevo de Almie','Almie te apoya'];
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [isUserInteracted, setIsUserInteracted] = useState(false);
+
+  // Effect for cycling through categories every 4 seconds
+  useEffect(() => {
+    // Only auto-cycle if user hasn't manually selected a category
+    if (isUserInteracted) return;
+
+    const interval = setInterval(() => {
+      setActiveCategory((current) => {
+        const currentIndex = categories.indexOf(current);
+        const nextIndex = (currentIndex + 1) % categories.length;
+        return categories[nextIndex];
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isUserInteracted, categories]);
 
   const goToPrevious = () => {
     setCurrentVideoIndex((prevIndex) =>
@@ -40,6 +59,16 @@ export function VideoCarousel() {
         setActiveTooltip(null);
       }, 3000);
     }
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setActiveCategory(category);
+    setIsUserInteracted(true);
+
+    // Reset auto-cycling after 30 seconds of inactivity
+    setTimeout(() => {
+      setIsUserInteracted(false);
+    }, 30000);
   };
 
   return (
@@ -102,9 +131,26 @@ export function VideoCarousel() {
           </div>
         </div>
 
-        <h2 className="text-4xl font-bold mb-10 text-center text-white">
+        <h2 className="text-4xl font-bold mb-6 text-center text-white">
           Nuestros Videos
         </h2>
+
+        {/* Video category buttons */}
+        <div className="flex flex-wrap justify-center gap-8 mb-10 max-w-4xl mx-auto">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleCategoryClick(category)}
+              className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all transform hover:scale-105 ${
+                activeCategory === category
+                  ? 'bg-white text-blue-600 shadow-lg'
+                  : 'bg-blue-600/30 text-white hover:bg-blue-600/50'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
 
         <div className="relative max-w-4xl mx-auto">
           {/* Video container with navigation arrows */}

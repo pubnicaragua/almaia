@@ -134,11 +134,11 @@ export default function Home() {
           <Menu size={24} />
         </button>
         <Image
-          src="/log.png"
+          src="/almaiaa.svg"
           alt="Almie character"
           width={200}
           height={40}
-          className="mx-auto h-10 w-40 sm:w-48"
+          className="mx-auto h-20 w-40 sm:w-48"
         />
         <button
           className="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-medium"

@@ -18,11 +18,11 @@ export default function TermsAndConditions() {
           <span>Volver</span>
         </Link>
         <Image
-          src="/log.png"
-          alt="AlmaIA Logo"
+          src="/almaiaa.svg"
+          alt="Almie character"
           width={200}
           height={40}
-          className="mx-auto h-10 w-40 sm:w-48"
+          className="mx-auto h-20 w-40 sm:w-48"
         />
         <div className="hidden md:block w-[100px]"></div>{' '}
         {/* Spacer for alignment */}
