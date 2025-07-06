@@ -9,6 +9,13 @@ import { SlideMenu } from '@/components/menu';
 import { InteractiveRatingGrid } from '@/components/hand';
 import { VideoCarousel } from '@/components/video-carousel';
 import FloatingWhatsAppButton from '@/components/whatsapp';
+<<<<<<< HEAD
+=======
+import InspirationalTicker from '@/components/AnimatedPhraseTicker'
+import ChatAlmieSim from '@/components/ChatAlmieSim'
+
+
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
 
 export default function Home() {
   const homeOfPageRef = useRef<HTMLFormElement>(null!);
@@ -108,7 +115,11 @@ export default function Home() {
         name: 'Youtube',
         href: 'https://youtu.be/vo6OhdCxnCM?si=O5CE4Wb9VInUNxnl',
       },
+<<<<<<< HEAD
       { name: 'X', href: 'https://x.com/almaia_cl' },
+=======
+      { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61576141720247' },
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
     ],
     legal: [
       { name: 'Términos', href: '/terminos' },
@@ -119,7 +130,11 @@ export default function Home() {
 
   return (
     <div className="bg-primary overflow-hidden">
+<<<<<<< HEAD
       <FloatingWhatsAppButton />
+=======
+      
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
       <header className="flex md:justify-between items-center px-8 py-8 md:mb-10">
         {isMenuOpen && (
           <SlideMenu
@@ -434,6 +449,15 @@ export default function Home() {
 
       <VideoCarousel />
 
+<<<<<<< HEAD
+=======
+<ChatAlmieSim />
+
+
+ {/* ticker de frases motivadoras */}
+      <InspirationalTicker />   {/* <-- nuevo */}
+
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
       <footer className="bg-[#a9d4fb]" ref={footOfPageRef}>
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-center mb-12 pb-8">

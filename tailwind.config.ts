@@ -78,13 +78,26 @@ const config = {
         gentleShake: {
           '0%, 100%': { transform: 'rotate(-2deg)' },
           '50%': { transform: 'rotate(2deg)' },
+<<<<<<< HEAD
         }
+=======
+        },
+          pulseBright: {
+    '0%, 100%': { filter: 'brightness(100%)' },
+    '50%': { filter: 'brightness(115%)' },
+  }
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "oscillate": 'oscillate 3s ease-in-out infinite',
         'gentle-shake': 'gentleShake 2s ease-in-out infinite',
+<<<<<<< HEAD
+=======
+          pulseBright: 'pulseBright 3s ease-in-out infinite',
+
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
       },
 
     },

@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+=======
+  "dev": "next dev",
+  "build": "next build",
+  "export": "next build && next export",  
+  "start": "next start",
+  "lint": "next lint"
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.2",
@@ -44,6 +52,10 @@
     "cmdk": "1.0.4",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "8.5.1",
+<<<<<<< HEAD
+=======
+    "framer-motion": "^12.19.2",
+>>>>>>> f5ebc5e (Updates Chat & Carrousel)
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
